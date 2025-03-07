@@ -1,0 +1,21 @@
+services:
+  noums-ebank-discovery-service2:
+   build: ./discovery-service2
+   container_name: noums-ebank-discovery-service2
+   ports:
+    - '8761:8761'
+   expose:
+    - '8712' 
+   healthcheck:
+    test: [ "CMD","curl","-f","http://localhost:8761/actuator/health" ]
+    interval: 10s
+  noums-ebank-config-service2:
+   build: ./config-service2
+   container_name: noums-ebank-config-service2
+   ports:
+    - '9998:9999' 
+   expose:
+    - '9998'
+   depends_on:
+    noums-ebank-discovery-service2:
+     condition: service_healthy
