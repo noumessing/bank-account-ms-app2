@@ -16,6 +16,8 @@ services:
     - '9998:9999' 
    expose:
     - '9998'
+   environment:
+    - DISCOVERY_SERVICE_URL=http://noums-ebank-discovery-service2:8761/eureka
    depends_on:
     noums-ebank-discovery-service2:
      condition: service_healthy
